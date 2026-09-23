@@ -1,4 +1,23 @@
 import os
+from threading import Thread
+from flask import Flask
+
+# Render to'xtab qolmasligi uchun kichik veb-server
+app = Flask(__name__)
+
+
+@app.route('/')
+def home():
+  return 'Bot muvaffaqiyatli ishlayapti!'
+
+
+def run_http():
+  port = int(os.environ.get('PORT', 8080))
+  app.run(host='0.0.0.0', port=port)
+
+
+# Veb-serverni orqa fonda ishga tushirish
+Thread(target=run_http).start()
 import json
 import logging
 import tempfile
